@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Restaurant Picker</title>
+    <style>
+	body {
+	    font-family: 'Microsoft Yahei', 'SimHei', Arial, sans-serif;
+	    text-align: center;
+	    margin: 50px;
+	}
+	button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+	#result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>午餐选择困难症辅助器</h1>
+    <button onclick="RestaurantGenerator()">随机选择一个餐厅</button>
+    <div id="result">点这个! &uarr;</div>
+    <script>
+	const messages = [
+	    "猜错了别怪我",
+	    "是不是点太多次了？",
+	    "有完没完？",
+	    "你再晚点餐厅要关门了,天也要黑了",
+	    "这些都入不了你的法眼吗？",
+	    "其实泡面也挺好吃的,真的",
+	    "回家吧,你别吃了",
+	    "要不一步到位，吔屎好了",
+	    "你再点一下试试呢？",
+	    "今天作业写完了吗？",
+	    "考试复习了吗？",
+	    "实习找到了吗？",
+	    "早睡早起了吗？",
+	    "没有？没有你在这浪费时间？",
+	    "别点了，想不出来说什么了",
+	    "真想不出来了，爱吃吃，不吃滚(ノ｀Д)ノ"
+	];
+	
+	let counter = 0;
+	const ChangeAfterNClicks = 5;
+	let messageIndex = 0;
+	function RestaurantGenerator(){
+	    counter++;
+	    
+	    const restaurants = ['山海','敦煌','经典食堂','河粉','周一不开的越南餐厅','麻辣烫','Shake Shack','御湘园','面堂','川里川外','炸鸡食堂','草莓食堂','黄焖鸡餐车','韩国餐车','牛肉饭咖啡厅','麻辣烫餐车','Taco餐车','日本拉面','泰餐','Chipotle'];
+	    const randomIndex = Math.floor(Math.random() * restaurants.length);
+	    const pickedRestaurant = restaurants[randomIndex];
+
+	    if (counter % ChangeAfterNClicks === 0){
+		messageIndex = (messageIndex + 1) % messages.length;
+	    }
+
+	    document.getElementById('result').innerText = `猜你想去: ${pickedRestaurant}, ${messages[messageIndex]}`;
+	}
+    </script>
+</body>
+</html>
